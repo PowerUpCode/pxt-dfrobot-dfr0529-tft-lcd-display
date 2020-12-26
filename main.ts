@@ -14,7 +14,8 @@ namespace LCD0529 {
     //% blockId=LCD_Init block="Init LCD SPI_MOSI|%SPI_MOSI|SPI_SCL|%SPI_SCL|WR|%WR|CS|%CS|RS|%RS|LCK|%LCK"
     //% weight=400 blockGap=8
     export function setup(SPI_MOSI: DigitalPin , SPI_SCL: DigitalPin, WR: DigitalPin, CS: DigitalPin, RS: DigitalPin, LCK: DigitalPin ): void  {
-        pins.spiPins(SPI_MOSI, DigitalPin.P8, SPI_SCL)
+        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCL)
+ 
         pins.digitalWritePin(CS, 1)
         pins.digitalWritePin(RS, 1)
         pins.digitalWritePin(WR, 1)
