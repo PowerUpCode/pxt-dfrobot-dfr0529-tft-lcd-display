@@ -1,3 +1,3 @@
-basic.forever(function () {
-	
-})
+namespace LCD0529 {
+
+}
