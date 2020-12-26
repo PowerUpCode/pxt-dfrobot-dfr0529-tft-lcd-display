@@ -16,6 +16,7 @@ namespace LCD0529 {
      * SPI_MOSI pins.P15
      * SPI_SCK pins.P13
      * CS pins.P16
+     * WR pins.P8
      * 
      * 
 	*/
