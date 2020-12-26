@@ -10,11 +10,19 @@ namespace LCD0529 {
 
     /**
 	 * LCD Initialize
+     * 
+     * MISO pins.P14
+     * 
+     * SPI_MOSI pins.P15
+     * SPI_SCK pins.P13
+     * CS pins.P16
+     * 
+     * 
 	*/
-    //% blockId=LCD_Init block="Init LCD SPI_MOSI|%SPI_MOSI|SPI_SCL|%SPI_SCL|WR|%WR|CS|%CS|RS|%RS|LCK|%LCK"
+    //% blockId=LCD_Init block="Init LCD SPI_MOSI|%SPI_MOSI|SPI_SCK|%SPI_SCK|WR|%WR|CS|%CS|RS|%RS|LCK|%LCK"
     //% weight=400 blockGap=8
-    export function setup(SPI_MOSI: DigitalPin , SPI_SCL: DigitalPin, WR: DigitalPin, CS: DigitalPin, RS: DigitalPin, LCK: DigitalPin ): void  {
-        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCL)
+    export function setup(SPI_MOSI: DigitalPin , SPI_SCK: DigitalPin, WR: DigitalPin, CS: DigitalPin, RS: DigitalPin, LCK: DigitalPin ): void  {
+        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
  
         pins.digitalWritePin(CS, 1)
         pins.digitalWritePin(RS, 1)
