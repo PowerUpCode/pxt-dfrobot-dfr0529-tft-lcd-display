@@ -17,4 +17,10 @@ namespace LCD0529 {
 
     }
 
+    //% blockId=Test_kuba block="Czy jest dobrze OK %ok"
+    //% weight=400 blockGap=8
+    export function test(ok: boolean): void {
+
+    }
+
 }
