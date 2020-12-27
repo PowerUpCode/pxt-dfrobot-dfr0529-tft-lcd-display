@@ -273,10 +273,14 @@ namespace LCD0529 {
 
     function writeRepeatPixel(color: number, count: number, repeatCount: number) {
             //uint8_t       colorBuf[2] = {color >> 8, color};
-            //uint32_t      i = 0;
-            //for(i = 0; i < repeatCount * count; i ++) {
-            //    writeDatBytes(colorBuf, 2);
-            //}
+        let colorBuf = pins.createBuffer(8);
+        colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
+        colorBuf.setNumber(NumberFormat.Int8LE, 5, color);            
+        //uint32_t      i = 0;
+        let i = 0;
+        for(i = 0; i < repeatCount * count; i ++) {
+            writeDatBytes(colorBuf, 2);
+        }
     }
 
 
