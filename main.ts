@@ -52,6 +52,18 @@ namespace LCD0529 {
     //% blockId=Test_kuba block="Czy jest dobrze OK %ok"
     //% weight=400 blockGap=8
     export function test(ok: boolean): void {
+    
+        //uint8_t i, j;
+        //_DEBUG_PRINT("\nfill screen");
+        setCursorAddr(0, 0, 128, 128);
+        writeToRam();
+        //writeRepeatPixel(color, 128, 128);
+
+    }
+
+    //% blockId=fill_screen block="Fill screen with color %color"
+    //% weight=400 blockGap=8
+    export function fillScreen(color: number): void {
 
     }
 
@@ -231,6 +243,15 @@ namespace LCD0529 {
   //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
   //writeCmd(0x2b);
   //writeDatBytes(addrBuf, 2);
+    }
+
+    function limitPixel(x: number, y: number): number {
+        //x += cursorX;
+        //y += cursorY;
+        //if((x < 0) || (y > height) ||  (x > width) || (y < 0)) {
+        //    return -1;
+        //}
+        return 0;        
     }
 
 
