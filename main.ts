@@ -230,6 +230,7 @@ namespace LCD0529 {
 
 
     function drawPixel(x: number, y: number, color: number):void {
+        console.log('drawPixel begin')
         let colorBuf = pins.createBuffer(8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color);
@@ -243,6 +244,7 @@ namespace LCD0529 {
 
 
     function setCursorAddr(x0: number, y0: number, x1: number, y1: number) {
+        console.log('setCursorAddr begin')
         let addrBuf = pins.createBuffer(8);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, x0);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, x1);
