@@ -8,6 +8,9 @@ let RS: DigitalPin
 let WR: DigitalPin
 let LCK: DigitalPin
 
+let height = 127
+let width = 127
+
 /**
  * LCD0529 mudule
  */
@@ -53,18 +56,17 @@ namespace LCD0529 {
     //% weight=400 blockGap=8
     export function test(ok: boolean): void {
     
-        //uint8_t i, j;
-        //_DEBUG_PRINT("\nfill screen");
-        setCursorAddr(0, 0, 128, 128);
-        writeToRam();
-        //writeRepeatPixel(color, 128, 128);
 
     }
 
     //% blockId=fill_screen block="Fill screen with color %color"
     //% weight=400 blockGap=8
     export function fillScreen(color: number): void {
-
+        //uint8_t i, j;
+        //_DEBUG_PRINT("\nfill screen");
+        setCursorAddr(0, 0, 128, 128);
+        writeToRam();
+        writeRepeatPixel(color, 128, 128);
     }
 
 
@@ -228,18 +230,24 @@ namespace LCD0529 {
 
 
     function drawPixel(x: number, y: number, color: number):void {
+        let colorBuf = pins.createBuffer(8);
+        colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
+        colorBuf.setNumber(NumberFormat.Int8LE, 5, color);
         //uint8_t colorBuf[2] = {color >> 8, color};
-        //if(limitPixel(x, y) < 0) {return;}
+        if(limitPixel(x, y) < 0) {return;}
         setCursorAddr(x, y, x, y);
         writeToRam();
-        //writeDatBytes(colorBuf, 2);        
+        writeDatBytes(colorBuf, 2);        
     }
 
 
     function setCursorAddr(x0: number, y0: number, x1: number, y1: number) {
-  //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
-        //writeCmd(0x2a);
-        //writeDatBytes(addrBuf, 2);
+        let addrBuf = pins.createBuffer(8);
+        addrBuf.setNumber(NumberFormat.Int8LE, 5, x0);
+        addrBuf.setNumber(NumberFormat.Int8LE, 5, x1);
+        //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
+        writeCmd(0x2a);
+        writeDatBytes(addrBuf, 2);
   //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
   //writeCmd(0x2b);
   //writeDatBytes(addrBuf, 2);
@@ -252,6 +260,14 @@ namespace LCD0529 {
         //    return -1;
         //}
         return 0;        
+    }
+
+    function writeRepeatPixel(color: number, count: number, repeatCount: number) {
+            //uint8_t       colorBuf[2] = {color >> 8, color};
+            //uint32_t      i = 0;
+            //for(i = 0; i < repeatCount * count; i ++) {
+            //    writeDatBytes(colorBuf, 2);
+            //}
     }
 
 
