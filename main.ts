@@ -214,6 +214,43 @@ namespace LCD0529 {
 
     }
 
+
+    function drawPixel(x: number, y: number, color: number):void {
+        //uint8_t colorBuf[2] = {color >> 8, color};
+        //if(limitPixel(x, y) < 0) {return;}
+        setCursorAddr(x, y, x, y);
+        writeToRam();
+        //writeDatBytes(colorBuf, 2);        
+    }
+
+
+    function setCursorAddr(x0: number, y0: number, x1: number, y1: number) {
+  //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
+        //writeCmd(0x2a);
+        //writeDatBytes(addrBuf, 2);
+  //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
+  //writeCmd(0x2b);
+  //writeDatBytes(addrBuf, 2);
+    }
+
+
+    function writeDatBytes(pDat: Buffer, count: number) {
+        pins.digitalWritePin(RS, 1)
+        pins.digitalWritePin(CS, 0)
+        while(count --) {
+            //spiWrite(*pDat, true)
+            pins.digitalWritePin(WR, 0)
+            pDelay()
+            pins.digitalWritePin(WR, 1)
+            //pDat ++;
+        }
+        pins.digitalWritePin(CS, 1)
+    }
+
+    function writeToRam():void {
+        writeCmd(0x2c);
+    }
+
     function pDelay() {
        // control.waitMicros(1)
     }
