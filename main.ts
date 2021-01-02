@@ -93,10 +93,10 @@ namespace LCD0529 {
 
         console.log('ST7687S begin')
         control.waitMicros(1200)
-
+/*
         writeCmd(0xd7); /// Disable auto read
         writeDat(0x9f);
-/*
+
         writeCmd(0xE0); /// EE control in
         writeDat(0x00);
         control.waitMicros(100);
