@@ -122,7 +122,7 @@ namespace LCD0529 {
         writeDat(0x1E);
         writeCmd(0xC3); /// Bias selection
         writeDat(0x03);
-
+/*
         writeCmd(0xC4); /// Booster setting
         writeDat(0x07);
 
@@ -198,7 +198,7 @@ namespace LCD0529 {
         writeDat(0x1A);
         writeDat(0x1C);
         writeDat(0x1E);
-
+*/
         writeCmd(0x29); /// Display On       
 
 
