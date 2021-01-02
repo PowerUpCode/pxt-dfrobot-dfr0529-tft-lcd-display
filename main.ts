@@ -96,7 +96,7 @@ namespace LCD0529 {
 
         writeCmd(0xd7); /// Disable auto read
         writeDat(0x9f);
-
+/*
         writeCmd(0xE0); /// EE control in
         writeDat(0x00);
         control.waitMicros(100);
@@ -105,7 +105,7 @@ namespace LCD0529 {
         writeCmd(0xFA); /// Erase EEPROM data
         writeDat(0x01);
         control.waitMicros(200); 
-/*
+
         writeCmd(0xE3); /// Read from EEPROM
         control.waitMicros(200);
         writeCmd(0xE1);	
