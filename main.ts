@@ -105,7 +105,7 @@ namespace LCD0529 {
         writeCmd(0xFA); /// Erase EEPROM data
         writeDat(0x01);
         control.waitMicros(200); 
-
+/*
         writeCmd(0xE3); /// Read from EEPROM
         control.waitMicros(200);
         writeCmd(0xE1);	
@@ -122,7 +122,7 @@ namespace LCD0529 {
         writeDat(0x1E);
         writeCmd(0xC3); /// Bias selection
         writeDat(0x03);
-/*
+
         writeCmd(0xC4); /// Booster setting
         writeDat(0x07);
 
