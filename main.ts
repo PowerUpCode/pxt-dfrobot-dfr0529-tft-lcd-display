@@ -239,7 +239,7 @@ namespace LCD0529 {
 
         pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
         pins.spiFormat(8, 3)
-        pins.spiFrequency(4000000)
+        pins.spiFrequency(1000000)
         pins.spiWrite(cmd)
 
         if(action) {
@@ -326,7 +326,7 @@ namespace LCD0529 {
     }
 
     function pDelay() {
-       // control.waitMicros(1)
+        control.waitMicros(1)
     }
 
 }
