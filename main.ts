@@ -7,6 +7,8 @@ let CS: DigitalPin
 let RS: DigitalPin
 let WR: DigitalPin
 let LCK: DigitalPin
+let SPI_MOSI: DigitalPin
+let SPI_SCK: DigitalPin
 
 let height = 127
 let width = 127
@@ -56,19 +58,17 @@ namespace LCD0529 {
 	*/
     //% blockId=LCD_Init block="Init LCD SPI_MOSI|%SPI_MOSI|SPI_SCK|%SPI_SCK|CS|%CS_|RS|%RS_|WR|%WR_|LCK|%LCK_"
     //% weight=400 blockGap=8
-    export function setup(SPI_MOSI = DigitalPin.P13 , SPI_SCK = DigitalPin.P15, CS_ = DigitalPin.P16, RS_ = DigitalPin.P2, WR_ = DigitalPin.P8, LCK_ = DigitalPin.P12 ): void  {
+    export function setup(SPI_MOSI_ = DigitalPin.P13 , SPI_SCK_ = DigitalPin.P15, CS_ = DigitalPin.P16, RS_ = DigitalPin.P2, WR_ = DigitalPin.P8, LCK_ = DigitalPin.P12 ): void  {
         
         CS = CS_
         RS = RS_
         WR = WR_
         LCK = LCK_
+        SPI_MOSI = SPI_MOSI_
+        SPI_SCK = SPI_SCK_
 
 
-        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
-        pins.spiFormat(8, 3)
-        pins.spiFrequency(4000000)
 
- 
         pins.digitalWritePin(CS, 1)
         pins.digitalWritePin(RS, 1)
         pins.digitalWritePin(WR, 1)
@@ -237,6 +237,9 @@ namespace LCD0529 {
 
     function spiWrite(cmd: number, action: boolean) {
 
+        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
+        pins.spiFormat(8, 3)
+        pins.spiFrequency(4000000)
         pins.spiWrite(cmd)
 
         if(action) {
