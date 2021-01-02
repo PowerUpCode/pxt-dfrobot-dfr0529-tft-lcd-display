@@ -11,6 +11,31 @@ let LCK: DigitalPin
 let height = 127
 let width = 127
 
+
+enum color_list {
+    
+DISPLAY_BLACK=0x0000,      /*   0,   0,   0 */
+DISPLAY_NAVY=0x000F,      /*   0,   0, 128 */
+DISPLAY_DARKGREEN=0x03E0,      /*   0, 128,   0 */
+DISPLAY_DARKCYAN=0x03EF,      /*   0, 128, 128 */
+DISPLAY_MAROON=0x7800,      /* 128,   0,   0 */
+DISPLAY_PURPLE=0x780F,     /* 128,   0, 128 */
+DISPLAY_OLIVE=0x7BE0,     /* 128, 128,   0 */
+DISPLAY_LIGHTGREY=0xC618,      /* 192, 192, 192 */
+DISPLAY_DARKGREY=0x7BEF,      /* 128, 128, 128 */
+DISPLAY_BLUE=0x001F,      /*   0,   0, 255 */
+DISPLAY_GREEN=0x07E0,      /*   0, 255,   0 */
+DISPLAY_CYAN=0x07FF,      /*   0, 255, 255 */
+DISPLAY_RED=0xF800,      /* 255,   0,   0 */
+DISPLAY_MAGENTA=0xF81F,      /* 255,   0, 255 */
+DISPLAY_YELLOW=0xFFE0,      /* 255, 255,   0 */
+DISPLAY_WHITE=0xFFFF,      /* 255, 255, 255 */
+DISPLAY_ORANGE=0xFD20,      /* 255, 165,   0 */
+DISPLAY_GREENYELLOW=0xAFE5,      /* 173, 255,  47 */
+DISPLAY_PINK=0xF81F
+};
+
+
 /**
  * LCD0529 mudule
  */
@@ -54,7 +79,7 @@ namespace LCD0529 {
 
     //% blockId=fill_screen block="Fill screen with color %color"
     //% weight=400 blockGap=8
-    export function fillScreen(color: number): void {
+    export function fillScreen(color: color_list): void {
         //uint8_t i, j;
         //_DEBUG_PRINT("\nfill screen");
         setCursorAddr(0, 0, 128, 128);
@@ -227,7 +252,7 @@ namespace LCD0529 {
         let colorBuf = pins.createBuffer(8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color);
-        console.log(colorBuf)
+        console.log(colorBuf[0])
         //uint8_t colorBuf[2] = {color >> 8, color};
         if(limitPixel(x, y) < 0) {return;}
         setCursorAddr(x, y, x, y);
@@ -241,7 +266,7 @@ namespace LCD0529 {
         let addrBuf = pins.createBuffer(8);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, x0);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, x1);
-        console.log(addrBuf)
+        console.log(addrBuf[0])
         //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
         writeCmd(0x2a);
         writeDatBytes(addrBuf, 2);
@@ -249,7 +274,7 @@ namespace LCD0529 {
         addrBuf = pins.createBuffer(8);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, y0);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, y1);
-        console.log(addrBuf)
+        console.log(addrBuf[0])
   //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
         writeCmd(0x2b);
         writeDatBytes(addrBuf, 2);
@@ -270,6 +295,8 @@ namespace LCD0529 {
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color);            
         //uint32_t      i = 0;
+        console.log('color');
+        console.log(colorBuf[0]);
         let i = 0;
         for(i = 0; i < repeatCount * count; i ++) {
             writeDatBytes(colorBuf, 2);
