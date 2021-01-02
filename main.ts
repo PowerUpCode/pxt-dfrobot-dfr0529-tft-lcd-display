@@ -65,6 +65,7 @@ namespace LCD0529 {
 
 
         pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
+        pins.spiFormat(8, 3)
         pins.spiFrequency(4000000)
 
  
