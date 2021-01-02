@@ -67,7 +67,9 @@ namespace LCD0529 {
         SPI_MOSI = SPI_MOSI_
         SPI_SCK = SPI_SCK_
 
-
+        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
+        pins.spiFormat(8, 3)
+        pins.spiFrequency(4000000)
 
         pins.digitalWritePin(CS, 1)
         pins.digitalWritePin(RS, 1)
@@ -93,7 +95,7 @@ namespace LCD0529 {
 
         console.log('ST7687S begin')
         control.waitMicros(1200)
-/*
+
         writeCmd(0xd7); /// Disable auto read
         writeDat(0x9f);
 
@@ -114,6 +116,8 @@ namespace LCD0529 {
         writeCmd(0x28); /// display off
         writeCmd(0x11);	/// Sleep Out
         control.waitMicros(300);
+/*
+
         writeCmd(0xc0); /// Vop setting
         writeDat(0x17);  //ctrL=0x1b 080416 5PCS 0X1E; 8PCS 0X2A ?????
         writeDat(0x01);  // base on Module      
@@ -198,9 +202,9 @@ namespace LCD0529 {
         writeDat(0x1A);
         writeDat(0x1C);
         writeDat(0x1E);
-*/
-        writeCmd(0x29); /// Display On       
 
+        writeCmd(0x29); /// Display On       
+*/
 
         
     }
@@ -237,9 +241,7 @@ namespace LCD0529 {
 
     function spiWrite(cmd: number, action: boolean) {
 
-        pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
-        pins.spiFormat(8, 3)
-        pins.spiFrequency(1000000)
+
         pins.spiWrite(cmd)
 
         if(action) {
