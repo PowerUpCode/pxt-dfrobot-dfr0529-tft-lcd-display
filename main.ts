@@ -31,7 +31,7 @@ namespace LCD0529 {
 	*/
     //% blockId=LCD_Init block="Init LCD SPI_MOSI|%SPI_MOSI|SPI_SCK|%SPI_SCK|CS|%CS_|RS|%RS_|WR|%WR_|LCK|%LCK_"
     //% weight=400 blockGap=8
-    export function setup(SPI_MOSI: DigitalPin , SPI_SCK: DigitalPin, CS_: DigitalPin, RS_: DigitalPin, WR_: DigitalPin, LCK_: DigitalPin ): void  {
+    export function setup(SPI_MOSI = DigitalPin.P13 , SPI_SCK = DigitalPin.P15, CS_ = DigitalPin.P16, RS_ = DigitalPin.P2, WR_ = DigitalPin.P8, LCK_ = DigitalPin.P12 ): void  {
         
         CS = CS_
         RS = RS_
@@ -50,13 +50,6 @@ namespace LCD0529 {
 
         initLCD()
         
-    }
-
-    //% blockId=Test_kuba block="Czy jest dobrze OK %ok"
-    //% weight=400 blockGap=8
-    export function test(ok: boolean): void {
-    
-
     }
 
     //% blockId=fill_screen block="Fill screen with color %color"
