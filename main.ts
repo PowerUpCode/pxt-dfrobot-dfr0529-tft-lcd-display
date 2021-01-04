@@ -250,9 +250,10 @@ namespace LCD0529 {
     }
 
     function spiWrite(cmd: number, action: boolean) {
-
+        console.log('SPI transfer')
         console.log(cmd)
         console.log(rbit(cmd))
+        console.log('............')
 
         pins.spiWrite(rbit(cmd))
 
@@ -270,7 +271,7 @@ namespace LCD0529 {
         let colorBuf = pins.createBuffer(8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color);
-        console.log(colorBuf[0])
+        //console.log(colorBuf[0])
         //uint8_t colorBuf[2] = {color >> 8, color};
         if(limitPixel(x, y) < 0) {return;}
         setCursorAddr(x, y, x, y);
@@ -284,7 +285,7 @@ namespace LCD0529 {
         let addrBuf = pins.createBuffer(8);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, x0);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, x1);
-        console.log(addrBuf[0])
+        //console.log(addrBuf[0])
         //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
         writeCmd(0x2a);
         writeDatBytes(addrBuf, 2);
@@ -292,7 +293,7 @@ namespace LCD0529 {
         addrBuf = pins.createBuffer(8);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, y0);
         addrBuf.setNumber(NumberFormat.Int8LE, 5, y1);
-        console.log(addrBuf[0])
+        //console.log(addrBuf[0])
   //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
         writeCmd(0x2b);
         writeDatBytes(addrBuf, 2);
@@ -314,7 +315,7 @@ namespace LCD0529 {
         colorBuf.setNumber(NumberFormat.Int8LE, 5, color);            
         //uint32_t      i = 0;
         console.log('color');
-        console.log(colorBuf[0]);
+        //console.log(colorBuf[0]);
         let i = 0;
         for(i = 0; i < repeatCount * count; i ++) {
             writeDatBytes(colorBuf, 2);
