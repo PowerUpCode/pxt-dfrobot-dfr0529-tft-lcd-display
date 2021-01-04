@@ -271,10 +271,10 @@ namespace LCD0529 {
     }
 
     function spiWrite(cmd: number, action: boolean) {
-        console.log('SPI transfer')
-        console.log(cmd)
+        //console.log('SPI transfer')
+        //console.log(cmd)
         //console.log(rbit(cmd))
-        console.log('............')
+        //console.log('............')
 
         pins.spiWrite(cmd)
 
@@ -292,8 +292,8 @@ namespace LCD0529 {
         let colorBuf = pins.createBuffer(2);
         colorBuf[0] = ((color >> 8) & 0xff);
         colorBuf[1] = (color & 0xff);
-        console.log(colorBuf[0])
-        console.log(colorBuf[1])        
+        //console.log(colorBuf[0])
+        //console.log(colorBuf[1])        
         //var high = ((firstNumber >> 8) & 0xff);
         ///var low = firstNumber & 0xff;
         //console.log(colorBuf[0])
@@ -310,8 +310,8 @@ namespace LCD0529 {
         let addrBuf = pins.createBuffer(2);
         addrBuf[0] = x0;
         addrBuf[1] = x1;
-        console.log(addrBuf[0])
-        console.log(addrBuf[1])
+        //console.log(addrBuf[0])
+        //console.log(addrBuf[1])
         //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
         writeCmd(0x2a);
         writeDatBytes(addrBuf, 2);
@@ -319,8 +319,8 @@ namespace LCD0529 {
         //addrBuf = pins.createBuffer(8);
         addrBuf[0] = y0;
         addrBuf[1] = y1;
-        console.log(addrBuf[0])
-        console.log(addrBuf[1])
+        //console.log(addrBuf[0])
+        //console.log(addrBuf[1])
   //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
         writeCmd(0x2b);
         writeDatBytes(addrBuf, 2);
@@ -341,9 +341,9 @@ namespace LCD0529 {
         colorBuf[0] = ((color >> 8) & 0xff);
         colorBuf[1] = (color & 0xff);            
         //uint32_t      i = 0;
-        console.log('color');
-        console.log(colorBuf[0]);
-        console.log(colorBuf[1]);
+        //console.log('color');
+        //console.log(colorBuf[0]);
+        //console.log(colorBuf[1]);
         let i = 0;
         for(i = 0; i < repeatCount * count; i ++) {
             writeDatBytes(colorBuf, 2);
