@@ -126,7 +126,7 @@ namespace LCD0529 {
         writeCmd(0x28); /// display off
         writeCmd(0x11);	/// Sleep Out
         control.waitMicros(300);
-/*
+
 
         writeCmd(0xc0); /// Vop setting
         writeDat(0x17);  //ctrL=0x1b 080416 5PCS 0X1E; 8PCS 0X2A ?????
@@ -214,7 +214,7 @@ namespace LCD0529 {
         writeDat(0x1E);
 
         writeCmd(0x29); /// Display On       
-*/
+
 
         
     }
