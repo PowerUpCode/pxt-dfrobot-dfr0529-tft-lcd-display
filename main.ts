@@ -107,6 +107,14 @@ namespace LCD0529 {
         drawPixel(x, y, color)
     }
 
+    //% blockId=lcd_off block="Disable LCD"
+    //% weight=400 blockGap=8
+    export function disableLCD() {
+        writeCmd(0x28); /// display off
+        writeCmd(0x11);	/// Sleep Out
+        control.waitMicros(300);
+    }
+
 
     function initLCD() {
 
