@@ -101,6 +101,12 @@ namespace LCD0529 {
         writeRepeatPixel(color, 128, 128);
     }
 
+    //% blockId=show_pixel block="Show pixel %x %y with color %color"
+    //% weight=400 blockGap=8
+    export function showPixel(x: number, y: number, color: color_list) {
+        drawPixel(x, y, color)
+    }
+
 
     function initLCD() {
 
