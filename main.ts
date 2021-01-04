@@ -66,9 +66,9 @@ namespace LCD0529 {
      * 
      * 
 	*/
-    //% blockId=LCD_Init block="Init LCD SPI_MOSI|%SPI_MOSI|SPI_SCK|%SPI_SCK|CS|%CS_|RS|%RS_|WR|%WR_|LCK|%LCK_"
+    //% blockId=LCD_Init block="Init LCD || SPI_MOSI|%SPI_MOSI|SPI_SCK|%SPI_SCK|CS|%CS_|RS|%RS_|WR|%WR_|LCK|%LCK_"
     //% weight=400 blockGap=8
-    export function setup(SPI_MOSI_ = DigitalPin.P13 , SPI_SCK_ = DigitalPin.P15, CS_ = DigitalPin.P16, RS_ = DigitalPin.P2, WR_ = DigitalPin.P8, LCK_ = DigitalPin.P12 ): void  {
+    export function setup(SPI_MOSI_: DigitalPin = DigitalPin.P13 , SPI_SCK_: DigitalPin = DigitalPin.P15, CS_: DigitalPin = DigitalPin.P16, RS_: DigitalPin = DigitalPin.P2, WR_: DigitalPin = DigitalPin.P8, LCK_: DigitalPin = DigitalPin.P12 ): void  {
         
         CS = CS_
         RS = RS_
