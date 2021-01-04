@@ -79,7 +79,7 @@ namespace LCD0529 {
         SPI_SCK = SPI_SCK_
 
         pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
-        pins.spiFormat(8, 0)
+        pins.spiFormat(8, 3)
         pins.spiFrequency(4000000)
 
         pins.digitalWritePin(CS, 1)
@@ -142,7 +142,7 @@ namespace LCD0529 {
         writeCmd(0x11);	/// Sleep Out
         control.waitMicros(300);
 
-/*
+
         writeCmd(0xc0); /// Vop setting
         writeDat(0x17);  //ctrL=0x1b 080416 5PCS 0X1E; 8PCS 0X2A ?????
         writeDat(0x01);  // base on Module      
@@ -229,7 +229,7 @@ namespace LCD0529 {
         writeDat(0x1E);
 
         writeCmd(0x29); /// Display On       
-*/
+
 
         
     }
@@ -267,10 +267,10 @@ namespace LCD0529 {
     function spiWrite(cmd: number, action: boolean) {
         console.log('SPI transfer')
         console.log(cmd)
-        console.log(rbit(cmd))
+        //console.log(rbit(cmd))
         console.log('............')
 
-        pins.spiWrite(rbit(cmd))
+        pins.spiWrite(cmd)
 
         if(action) {
             pins.digitalWritePin(LCK, 1)
