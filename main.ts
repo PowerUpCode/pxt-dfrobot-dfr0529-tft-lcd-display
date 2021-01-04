@@ -115,6 +115,12 @@ namespace LCD0529 {
         control.waitMicros(300);
     }
 
+    //% blockId=lcd_on block="Enable LCD"
+    //% weight=400 blockGap=8
+    export function enableLCD() {
+        writeCmd(0x29); /// display on
+        control.waitMicros(300);
+    }
 
     function initLCD() {
 
