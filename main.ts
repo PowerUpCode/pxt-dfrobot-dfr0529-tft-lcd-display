@@ -268,9 +268,9 @@ namespace LCD0529 {
 
     function drawPixel(x: number, y: number, color: number):void {
         console.log('drawPixel begin')
-        let colorBuf = pins.createBuffer(8);
-        colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
-        colorBuf.setNumber(NumberFormat.Int8LE, 5, color);
+        let colorBuf = pins.createBuffer(2);
+        colorBuf[0] = color >> 8;
+        colorBuf[1] = color;
         //console.log(colorBuf[0])
         //uint8_t colorBuf[2] = {color >> 8, color};
         if(limitPixel(x, y) < 0) {return;}
@@ -282,17 +282,17 @@ namespace LCD0529 {
 
     function setCursorAddr(x0: number, y0: number, x1: number, y1: number) {
         console.log('setCursorAddr begin')
-        let addrBuf = pins.createBuffer(8);
-        addrBuf.setNumber(NumberFormat.Int8LE, 5, x0);
-        addrBuf.setNumber(NumberFormat.Int8LE, 5, x1);
+        let addrBuf = pins.createBuffer(2);
+        addrBuf[0] = x0;
+        addrBuf[1] = x1;
         //console.log(addrBuf[0])
         //uint8_t addrBuf[2] = {(uint16_t)x0 , (uint16_t)x1};
         writeCmd(0x2a);
         writeDatBytes(addrBuf, 2);
 
-        addrBuf = pins.createBuffer(8);
-        addrBuf.setNumber(NumberFormat.Int8LE, 5, y0);
-        addrBuf.setNumber(NumberFormat.Int8LE, 5, y1);
+        //addrBuf = pins.createBuffer(8);
+        addrBuf[0] = y0;
+        addrBuf[1] = y1;
         //console.log(addrBuf[0])
   //addrBuf[0] = (uint16_t)y0; addrBuf[1] = (uint16_t)y1;
         writeCmd(0x2b);
@@ -310,9 +310,9 @@ namespace LCD0529 {
 
     function writeRepeatPixel(color: number, count: number, repeatCount: number) {
             //uint8_t       colorBuf[2] = {color >> 8, color};
-        let colorBuf = pins.createBuffer(8);
-        colorBuf.setNumber(NumberFormat.Int8LE, 5, color >> 8);
-        colorBuf.setNumber(NumberFormat.Int8LE, 5, color);            
+        let colorBuf = pins.createBuffer(2);
+        colorBuf[0] = color >> 8;
+        colorBuf[1] = color;            
         //uint32_t      i = 0;
         console.log('color');
         //console.log(colorBuf[0]);
