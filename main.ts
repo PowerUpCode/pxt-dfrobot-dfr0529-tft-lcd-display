@@ -354,12 +354,13 @@ namespace LCD0529 {
     function writeDatBytes(pDat: Buffer, count: number) {
         pins.digitalWritePin(RS, 1)
         pins.digitalWritePin(CS, 0)
+        let i = 0;
         while(count --) {
-            //spiWrite(*pDat, true)
+            spiWrite(pDat[i], true)
             pins.digitalWritePin(WR, 0)
             pDelay()
             pins.digitalWritePin(WR, 1)
-            //pDat ++;
+            i ++;
         }
         pins.digitalWritePin(CS, 1)
     }
