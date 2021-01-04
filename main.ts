@@ -79,7 +79,7 @@ namespace LCD0529 {
         SPI_SCK = SPI_SCK_
 
         pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
-        pins.spiFormat(8, 3)
+        pins.spiFormat(8, 0)
         pins.spiFrequency(4000000)
 
         pins.digitalWritePin(CS, 1)
