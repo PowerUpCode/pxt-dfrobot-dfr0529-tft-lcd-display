@@ -211,7 +211,22 @@ let SPI_SCK: DigitalPin
         drawHLine(x, y + height + dirY, width, color);
         drawVLine(x, y, height, color);
         drawVLine(x + width + dirX, y, height, color);
-    }    
+    } 
+
+    //% blockId=draw_fill_rectangle block="Draw rectangle from x %x y %y with width %width height %height and color %color"
+    //% weight=800 blockGap=8
+    export function fillRect(x: number, y: number, width: number, height: number, 
+                                            color: color_list)
+    {
+        let directionX = 1;
+        let var1 = x + width;
+        if(width < 0) {
+            directionX = -1;
+        }
+        for(; x != var1; x += directionX) {
+            drawVLine(x, y, height, color);
+        }
+    }       
 
 
 
