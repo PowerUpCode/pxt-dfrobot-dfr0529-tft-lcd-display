@@ -213,7 +213,7 @@ let SPI_SCK: DigitalPin
         drawVLine(x + width + dirX, y, height, color);
     } 
 
-    //% blockId=draw_fill_rectangle block="Draw rectangle from x %x y %y with width %width height %height and color %color"
+    //% blockId=draw_fill_rectangle block="Draw filled rectangle from x %x y %y with width %width height %height and color %color"
     //% weight=800 blockGap=8
     export function fillRect(x: number, y: number, width: number, height: number, 
                                             color: color_list)
