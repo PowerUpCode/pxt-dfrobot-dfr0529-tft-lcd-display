@@ -170,9 +170,9 @@ let SPI_SCK: DigitalPin
         control.waitMicros(200); 
     }
 
-    //% blockId=draw_v_line block="Draw vertical line from x %x y %y with color %color and lenght %lenght"
+    //% blockId=draw_v_line block="Draw vertical line from x %x y %y with lenght %lenght color %color"
     //% weight=800 blockGap=8
-    export function drawVLine(x: number, y: number, color: color_list, lenght: number)
+    export function drawVLine(x: number, y: number, lenght: number, color: color_list)
     {
         //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
         let direction = 1;
@@ -185,9 +185,9 @@ let SPI_SCK: DigitalPin
         }
     }
 
-    //% blockId=draw_h_line block="Draw horizontal line from x %x y %y with color %color and lenght %lenght"
+    //% blockId=draw_h_line block="Draw horizontal line from x %x y %y with lenght %lenght color %color"
     //% weight=800 blockGap=8
-    export function drawHLine(x: number, y: number, color: color_list, lenght: number)
+    export function drawHLine(x: number, y: number, lenght: number, color: color_list)
     {
         //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
         let direction = 1;
