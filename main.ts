@@ -170,8 +170,8 @@ let SPI_SCK: DigitalPin
         control.waitMicros(200); 
     }
 
-    //% blockId=draw_v_line block="Draw vertical line from x|%x y|%y with color %color and lenght %lenght"
-    //% weight=400 blockGap=8
+    //% blockId=draw_v_line block="Draw vertical line from x %x y %y with color %color and lenght %lenght"
+    //% weight=800 blockGap=8
     export function drawVLine(x: number, y: number, color: color_list, lenght: number)
     {
         //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
@@ -185,7 +185,33 @@ let SPI_SCK: DigitalPin
         }
     }
 
+    //% blockId=draw_h_line block="Draw horizontal line from x %x y %y with color %color and lenght %lenght"
+    //% weight=800 blockGap=8
+    export function drawHLine(x: number, y: number, color: color_list, lenght: number)
+    {
+        //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
+        let direction = 1;
+        let var1 = x + lenght;
+        if(lenght < 0) {
+            direction = -1;
+        }
+        for(; x != var1; x += direction) {
+            drawPixel(x, y, color);
+        }
+    }
 
+    //% blockId=draw_rectangle block="Draw rectangle from x %x y %y with width %width height %height and color %color"
+    //% weight=800 blockGap=8
+    export function drawRect(x: number, y: number, width: number, height: number, 
+                                        color: color_list)
+    {
+        let dirX = (width > 0) ? -1 : 1;
+        let dirY = (height > 0) ? -1 : 1;
+        drawHLine(x, y, width, color);
+        drawHLine(x, y + height + dirY, width, color);
+        drawVLine(x, y, height, color);
+        drawVLine(x + width + dirX, y, height, color);
+    }    
 
 
 
