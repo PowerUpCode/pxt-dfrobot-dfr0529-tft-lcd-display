@@ -8,15 +8,15 @@
 
 
 
-    const rbits = hex`
-    008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8
-    048444C424A464E4149454D434B474F40C8C4CCC2CAC6CEC1C9C5CDC3CBC7CFC
-    028242C222A262E2129252D232B272F20A8A4ACA2AAA6AEA1A9A5ADA3ABA7AFA
-    068646C626A666E6169656D636B676F60E8E4ECE2EAE6EEE1E9E5EDE3EBE7EFE
-    018141C121A161E1119151D131B171F1098949C929A969E9199959D939B979F9
-    058545C525A565E5159555D535B575F50D8D4DCD2DAD6DED1D9D5DDD3DBD7DFD
-    038343C323A363E3139353D333B373F30B8B4BCB2BAB6BEB1B9B5BDB3BBB7BFB
-    078747C727A767E7179757D737B777F70F8F4FCF2FAF6FEF1F9F5FDF3FBF7FFF`
+const rbits = hex`
+008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8
+048444C424A464E4149454D434B474F40C8C4CCC2CAC6CEC1C9C5CDC3CBC7CFC
+028242C222A262E2129252D232B272F20A8A4ACA2AAA6AEA1A9A5ADA3ABA7AFA
+068646C626A666E6169656D636B676F60E8E4ECE2EAE6EEE1E9E5EDE3EBE7EFE
+018141C121A161E1119151D131B171F1098949C929A969E9199959D939B979F9
+058545C525A565E5159555D535B575F50D8D4DCD2DAD6DED1D9D5DDD3DBD7DFD
+038343C323A363E3139353D333B373F30B8B4BCB2BAB6BEB1B9B5BDB3BBB7BFB
+078747C727A767E7179757D737B777F70F8F4FCF2FAF6FEF1F9F5FDF3FBF7FFF`
 
 
 enum color_list {
@@ -95,9 +95,17 @@ let SPI_SCK: DigitalPin
      * 
      * 
 	*/
-    //% blockId=LCD_Init block="Init LCD || SPI_MOSI|%SPI_MOSI|SPI_SCK|%SPI_SCK|CS|%CS_|RS|%RS_|WR|%WR_|LCK|%LCK_"
+    //% blockId=LCD_Init block="Init LCD || SPI_MOSI|%SPI_MOSI_|SPI_SCK|%SPI_SCK_|CS|%CS_|RS|%RS_|WR|%WR_|LCK|%LCK_"
     //% weight=400 blockGap=8
     //% color=#DF6721
+    //% SPI_MOSI_.fieldEditor="gridpicker" SPI_MOSI_.fieldOptions.columns=4
+    //% SPI_MOSI_.fieldOptions.tooltips="false" SPI_MOSI_.fieldOptions.width="250"
+    //% SPI_SCK_.fieldEditor="gridpicker" SPI_SCK_.fieldOptions.columns=4
+    //% SPI_SCK_.fieldOptions.tooltips="false" SPI_SCK_.fieldOptions.width="250"
+
+
+
+
     export function setup(SPI_MOSI_: DigitalPin = DigitalPin.P13 , SPI_SCK_: DigitalPin = DigitalPin.P15, CS_: DigitalPin = DigitalPin.P16, RS_: DigitalPin = DigitalPin.P2, WR_: DigitalPin = DigitalPin.P8, LCK_: DigitalPin = DigitalPin.P12 ): void  {
         
         CS = CS_
@@ -132,7 +140,7 @@ let SPI_SCK: DigitalPin
         writeRepeatPixel(color, 128, 128);
     }
 
-    //% blockId=show_pixel block="Show pixel %x %y with color %color"
+    //% blockId=show_pixel block="Show pixel x|%x y|%y with color %color"
     //% weight=400 blockGap=8
     export function showPixel(x: number, y: number, color: color_list) {
         drawPixel(x, y, color)
@@ -161,6 +169,25 @@ let SPI_SCK: DigitalPin
         writeDat(0x01);
         control.waitMicros(200); 
     }
+
+    //% blockId=draw_v_line block="Draw vertical line from x|%x y|%y with color %color and lenght %lenght"
+    //% weight=400 blockGap=8
+    export function drawVLine(x: number, y: number, lenght: number, color: color_list)
+    {
+        //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
+        let direction = 1;
+        let var1 = y + lenght;
+        if(lenght < 0) {
+            direction = -1;
+        }
+        for(; y != var1; y += direction) {
+            drawPixel(x, y, color);
+        }
+    }
+
+
+
+
 
     function initLCD() {
 
@@ -441,5 +468,12 @@ let SPI_SCK: DigitalPin
     function pDelay() {
         //control.waitMicros(1)
     }
+
+    //uint16_t color24To16(uint8_t r, uint8_t g, uint8_t b)
+    //{
+    //  return (uint16_t)((((uint16_t)r >> 3) << 11) | (((uint16_t)g >> 2) << 5) | ((uint16_t)b >> 3));
+    //}
+
+
 
 }
