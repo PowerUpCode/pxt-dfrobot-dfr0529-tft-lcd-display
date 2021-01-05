@@ -122,6 +122,15 @@ namespace LCD0529 {
         control.waitMicros(300);
     }
 
+    //% blockId=reset_display_memory block="Reset memory"
+    //% weight=400 blockGap=8
+
+    export function resetDisplay() {
+        writeCmd(0xFA); /// Erase EEPROM data
+        writeDat(0x01);
+        control.waitMicros(200); 
+    }
+
     function initLCD() {
 
         console.log('ST7687S begin')
@@ -134,7 +143,7 @@ namespace LCD0529 {
         writeDat(0x00);
         control.waitMicros(100);
 
-
+/*
         writeCmd(0xFA); /// Erase EEPROM data
         writeDat(0x01);
         control.waitMicros(200); 
@@ -142,7 +151,7 @@ namespace LCD0529 {
         writeCmd(0xE3); /// Read from EEPROM
         control.waitMicros(200);
         writeCmd(0xE1);	
-
+*/
 
         writeCmd(0x28); /// display off
         writeCmd(0x11);	/// Sleep Out
