@@ -3,15 +3,10 @@
  */
 
 
-let CS: DigitalPin
-let RS: DigitalPin
-let WR: DigitalPin
-let LCK: DigitalPin
-let SPI_MOSI: DigitalPin
-let SPI_SCK: DigitalPin
 
-let height = 127
-let width = 127
+
+
+
 
     const rbits = hex`
     008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8
@@ -54,6 +49,40 @@ DISPLAY_PINK=0xF81F
 //% weight=100 color=#DF6721 icon="\uf013" block="LCD Display"
 namespace LCD0529 {
 
+let display: Display
+const DISPLAY_ROUND = 1;
+const DISPLAY_RECTANGLE = 2;
+
+const MODE_CORNER = 1;
+const MODE_MIDDLE = 2;
+
+let CS: DigitalPin
+let RS: DigitalPin
+let WR: DigitalPin
+let LCK: DigitalPin
+let SPI_MOSI: DigitalPin
+let SPI_SCK: DigitalPin
+
+
+
+
+    class Display {
+        constructor(
+            public width: number,
+            public height: number,
+            public typ: number,
+            public mode: number,
+
+        ) {
+
+            this.update()
+        }  
+
+        public update() {
+
+        }      
+    }
+
     /**
 	 * LCD Initialize
      * 
@@ -88,6 +117,8 @@ namespace LCD0529 {
         pins.digitalWritePin(LCK, 1)
 
         initLCD()
+
+        display = new Display(128,128, DISPLAY_ROUND, MODE_CORNER)
         
     }
 
@@ -336,11 +367,25 @@ namespace LCD0529 {
     }
 
     function limitPixel(x: number, y: number): number {
-        //x += cursorX;
-        //y += cursorY;
-        //if((x < 0) || (y > height) ||  (x > width) || (y < 0)) {
-        //    return -1;
-        //}
+        if(display.typ === DISPLAY_ROUND) {
+            if(display.mode === MODE_CORNER) {
+                let centerX = display.width / 2
+                let centerY = display.height / 2
+                let radius = Math.max(centerX, centerY)
+
+                let distance = Math.abs(Math.sqrt(Math.pow((x-centerX), 2)+Math.pow((y-centerY), 2)))
+
+                if(distance > radius) {
+                    return -1
+                }
+            }
+
+        } else {
+            if(x < 0 || x > (display.width-1) || y < 0 || y > (display.height-1)) {
+                return -1
+            }
+        }
+
         return 0;        
     }
 
