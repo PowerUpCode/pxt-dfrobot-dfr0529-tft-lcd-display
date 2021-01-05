@@ -172,7 +172,7 @@ let SPI_SCK: DigitalPin
 
     //% blockId=draw_v_line block="Draw vertical line from x|%x y|%y with color %color and lenght %lenght"
     //% weight=400 blockGap=8
-    export function drawVLine(x: number, y: number, lenght: number, color: color_list)
+    export function drawVLine(x: number, y: number, color: color_list, lenght: number)
     {
         //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
         let direction = 1;
