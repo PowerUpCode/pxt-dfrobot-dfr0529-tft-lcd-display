@@ -385,7 +385,7 @@ namespace LCD0529 {
     }    
 
     function pDelay() {
-        control.waitMicros(1)
+        //control.waitMicros(1)
     }
 
 }
