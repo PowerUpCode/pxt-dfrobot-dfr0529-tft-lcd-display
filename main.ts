@@ -80,7 +80,7 @@ namespace LCD0529 {
 
         pins.spiPins(SPI_MOSI, DigitalPin.P14, SPI_SCK)
         pins.spiFormat(8, 0)
-        pins.spiFrequency(4000000)
+        pins.spiFrequency(8000000)
 
         pins.digitalWritePin(CS, 1)
         pins.digitalWritePin(RS, 1)
@@ -147,11 +147,11 @@ namespace LCD0529 {
         writeCmd(0xFA); /// Erase EEPROM data
         writeDat(0x01);
         control.waitMicros(200); 
-
+*/
         writeCmd(0xE3); /// Read from EEPROM
         control.waitMicros(200);
         writeCmd(0xE1);	
-*/
+
 
         writeCmd(0x28); /// display off
         writeCmd(0x11);	/// Sleep Out
