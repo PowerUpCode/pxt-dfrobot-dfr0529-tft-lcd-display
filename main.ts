@@ -328,7 +328,7 @@ let SPI_SCK: DigitalPin
 
 
     function drawPixel(x: number, y: number, color: number):void {
-        console.log('drawPixel begin')
+        //console.log('drawPixel begin')
         let colorBuf = pins.createBuffer(2);
         colorBuf[0] = ((color >> 8) & 0xff);
         colorBuf[1] = (color & 0xff);
@@ -346,7 +346,7 @@ let SPI_SCK: DigitalPin
 
 
     function setCursorAddr(x0: number, y0: number, x1: number, y1: number) {
-        console.log('setCursorAddr begin')
+        //console.log('setCursorAddr begin')
         let addrBuf = pins.createBuffer(2);
         addrBuf[0] = x0;
         addrBuf[1] = x1;
