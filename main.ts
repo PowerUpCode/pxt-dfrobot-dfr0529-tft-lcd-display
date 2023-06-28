@@ -63,6 +63,8 @@ let LCK: DigitalPin
 let SPI_MOSI: DigitalPin
 let SPI_SCK: DigitalPin
 
+let TextColor: int16
+
 
 
 
@@ -226,7 +228,17 @@ let SPI_SCK: DigitalPin
         for(; x != var1; x += directionX) {
             drawVLine(x, y, height, color);
         }
-    }       
+    }   
+
+
+    //% blockId=set_text_color block="Set text color to %color"
+    //% weight=800 blockGap=8
+    export function setTextColor(color: color_list)
+
+    {
+        TextColor = color;
+    }
+
 
 
 
