@@ -372,7 +372,7 @@ let TextSize: int8
         console.log('drawText');
 
         let characterBuffer: number[] = [];
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 32; i++) {
             characterBuffer.push(0);
         }
         let rslt = 0;
