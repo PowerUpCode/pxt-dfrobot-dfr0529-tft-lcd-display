@@ -252,6 +252,12 @@ let TextSize: int8
         drawPixel(x, y, color)
     }
 
+    //% blockId=show_pixel_with_hex block="Show pixel x|%x y|%y with hex color %color"
+    //% weight=400 blockGap=8
+    export function showPixelWithHex(x: number, y: number, color: number) {
+        drawPixel(x, y, color)
+    }
+
     //% blockId=lcd_off block="Disable LCD"
     //% weight=400 blockGap=8
     export function disableLCD() {
