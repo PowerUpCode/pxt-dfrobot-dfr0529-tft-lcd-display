@@ -369,6 +369,8 @@ let TextSize: int8
     //% weight=800 blockGap=8
     export function drawText(x: number, y: number, text: string) {
         
+        console.log('drawText');
+
         let characterBuffer: number[] = [];
         for (let i = 0; i < 32; i++) {
             characterBuffer.push(0);
@@ -380,6 +382,7 @@ let TextSize: int8
 
         for (let i = 0; i < text.length; i++) {
             const char = text[i];
+            console.log(char);
             let asciiCode = text.charCodeAt(i);
             rslt = getCharacter(asciiCode, characterBuffer, textWidth, textHeight);
             fillRect(x, y, textWidth * TextSize, textHeight * TextSize, TextBgColor);
@@ -397,11 +400,13 @@ let TextSize: int8
                 asciiCode += rslt;
                 //check range
                 if (x > display.width - textWidth * TextSize) {
+                    console.log('new line');
                     x = 0;
                     y += textHeight * TextSize;
                 }
                 if (y > display.height - textHeight * TextSize) {
                     //return DISPLAY_WAR_OUTRANGE;
+                    console.log('out of screen');
                 }
                 if (rslt > 1) {
                     /*display, charater example:
@@ -411,6 +416,7 @@ let TextSize: int8
                     */
                     for (i = 0; i < 32; i++) {
                         var1 = characterBuffer[i];
+                        console.log('characterBuffer ' + i + ' = ' + characterBuffer[i]);
                         for (j = 0; j < 8; j++) {
                             if (var1 & (0x01 << j)) {
                                 for (k = 0; k < TextSize; k++) {
