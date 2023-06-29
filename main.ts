@@ -384,8 +384,13 @@ let TextSize: int8
             const char = text[ti];
             console.log(char);
             let asciiCode = text.charCodeAt(ti);
+            console.log(asciiCode);
             rslt = getCharacter(asciiCode, characterBuffer, textWidth, textHeight);
             fillRect(x, y, textWidth * TextSize, textHeight * TextSize, TextBgColor);
+
+            console.log(rslt);
+            console.log(characterBuffer);
+
             if (rslt < 0) {
                 //return rslt;
             } else {
