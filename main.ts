@@ -121,26 +121,25 @@ const table_character_6_8: number [][] =
 
 
 enum color_list {
-    
-DISPLAY_BLACK=0x0000,      /*   0,   0,   0 */
-DISPLAY_NAVY=0x000F,      /*   0,   0, 128 */
-DISPLAY_DARKGREEN=0x03E0,      /*   0, 128,   0 */
-DISPLAY_DARKCYAN=0x03EF,      /*   0, 128, 128 */
-DISPLAY_MAROON=0x7800,      /* 128,   0,   0 */
-DISPLAY_PURPLE=0x780F,     /* 128,   0, 128 */
-DISPLAY_OLIVE=0x7BE0,     /* 128, 128,   0 */
-DISPLAY_LIGHTGREY=0xC618,      /* 192, 192, 192 */
-DISPLAY_DARKGREY=0x7BEF,      /* 128, 128, 128 */
-DISPLAY_BLUE=0x001F,      /*   0,   0, 255 */
-DISPLAY_GREEN=0x07E0,      /*   0, 255,   0 */
-DISPLAY_CYAN=0x07FF,      /*   0, 255, 255 */
-DISPLAY_RED=0xF800,      /* 255,   0,   0 */
-DISPLAY_MAGENTA=0xF81F,      /* 255,   0, 255 */
-DISPLAY_YELLOW=0xFFE0,      /* 255, 255,   0 */
-DISPLAY_WHITE=0xFFFF,      /* 255, 255, 255 */
-DISPLAY_ORANGE=0xFD20,      /* 255, 165,   0 */
-DISPLAY_GREENYELLOW=0xAFE5,      /* 173, 255,  47 */
-DISPLAY_PINK=0xF81F
+    DISPLAY_BLACK=0x0000,      /*   0,   0,   0 */
+    DISPLAY_NAVY=0x000F,      /*   0,   0, 128 */
+    DISPLAY_DARKGREEN=0x03E0,      /*   0, 128,   0 */
+    DISPLAY_DARKCYAN=0x03EF,      /*   0, 128, 128 */
+    DISPLAY_MAROON=0x7800,      /* 128,   0,   0 */
+    DISPLAY_PURPLE=0x780F,     /* 128,   0, 128 */
+    DISPLAY_OLIVE=0x7BE0,     /* 128, 128,   0 */
+    DISPLAY_LIGHTGREY=0xC618,      /* 192, 192, 192 */
+    DISPLAY_DARKGREY=0x7BEF,      /* 128, 128, 128 */
+    DISPLAY_BLUE=0x001F,      /*   0,   0, 255 */
+    DISPLAY_GREEN=0x07E0,      /*   0, 255,   0 */
+    DISPLAY_CYAN=0x07FF,      /*   0, 255, 255 */
+    DISPLAY_RED=0xF800,      /* 255,   0,   0 */
+    DISPLAY_MAGENTA=0xF81F,      /* 255,   0, 255 */
+    DISPLAY_YELLOW=0xFFE0,      /* 255, 255,   0 */
+    DISPLAY_WHITE=0xFFFF,      /* 255, 255, 255 */
+    DISPLAY_ORANGE=0xFD20,      /* 255, 165,   0 */
+    DISPLAY_GREENYELLOW=0xAFE5,      /* 173, 255,  47 */
+    DISPLAY_PINK=0xF81F
 };
 
 
@@ -241,7 +240,7 @@ let TextSize: int8
 
     //% blockId=fill_screen block="Fill screen with color %color"
     //% weight=400 blockGap=8
-    export function fillScreen(color: color_list): void {
+    export function fillScreen(color: number): void {
         //uint8_t i, j;
         //_DEBUG_PRINT("\nfill screen");
         setCursorAddr(0, 0, 128, 128);
@@ -251,7 +250,7 @@ let TextSize: int8
 
     //% blockId=show_pixel block="Show pixel x|%x y|%y with color %color"
     //% weight=400 blockGap=8
-    export function showPixel(x: number, y: number, color: color_list) {
+    export function showPixel(x: number, y: number, color: number) {
         drawPixel(x, y, color)
     }
 
@@ -287,7 +286,7 @@ let TextSize: int8
 
     //% blockId=draw_v_line block="Draw vertical line from x %x y %y with lenght %lenght color %color"
     //% weight=800 blockGap=8
-    export function drawVLine(x: number, y: number, lenght: number, color: color_list)
+    export function drawVLine(x: number, y: number, lenght: number, color: number)
     {
         //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
         let direction = 1;
@@ -302,7 +301,7 @@ let TextSize: int8
 
     //% blockId=draw_h_line block="Draw horizontal line from x %x y %y with lenght %lenght color %color"
     //% weight=800 blockGap=8
-    export function drawHLine(x: number, y: number, lenght: number, color: color_list)
+    export function drawHLine(x: number, y: number, lenght: number, color: number)
     {
         //if((x + cursorX < 0) || (x + cursorX > width)) {return;}
         let direction = 1;
@@ -318,7 +317,7 @@ let TextSize: int8
     //% blockId=draw_rectangle block="Draw rectangle from x %x y %y with width %width height %height and color %color"
     //% weight=800 blockGap=8
     export function drawRect(x: number, y: number, width: number, height: number, 
-                                        color: color_list)
+                                        color: number)
     {
         let dirX = (width > 0) ? -1 : 1;
         let dirY = (height > 0) ? -1 : 1;
@@ -331,7 +330,7 @@ let TextSize: int8
     //% blockId=draw_fill_rectangle block="Draw filled rectangle from x %x y %y with width %width height %height and color %color"
     //% weight=800 blockGap=8
     export function fillRect(x: number, y: number, width: number, height: number, 
-                                            color: color_list)
+                                            color: number)
     {
         let directionX = 1;
         let var1 = x + width;
@@ -346,7 +345,7 @@ let TextSize: int8
 
     //% blockId=set_text_color block="Set text color to %color"
     //% weight=800 blockGap=8
-    export function setTextColor(color: color_list)
+    export function setTextColor(color: number)
 
     {
         TextColor = color;
@@ -355,7 +354,7 @@ let TextSize: int8
 
     //% blockId=set_text_background_color block="Set text background color to %color"
     //% weight=800 blockGap=8
-    export function setTextBackgroundColor(color: color_list) {
+    export function setTextBackgroundColor(color: number) {
         TextBgColor = color;
     }
 
