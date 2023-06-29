@@ -372,7 +372,7 @@ let TextSize: int8
         console.log('drawText');
 
         let characterBuffer: number[] = [];
-        for (let i = 0; i < 32; i++) {
+        for (let i = 0; i < 6; i++) {
             characterBuffer.push(0);
         }
         let rslt = 0;
@@ -393,6 +393,7 @@ let TextSize: int8
 
             if (rslt < 0) {
                 //return rslt;
+                console.log('rslt error');
             } else {
                 if (asciiCode > 0x06 && asciiCode < 0x0e) {
                     if (asciiCode == 0x0a) {
@@ -413,7 +414,8 @@ let TextSize: int8
                     //return DISPLAY_WAR_OUTRANGE;
                     console.log('out of screen');
                 }
-                if (rslt > 1) {
+                if (rslt >= 1) {
+                    console.log('rslt ok');
                     /*display, charater example:
                       data: 0xf0, 0x0f, 0x55, 0xaa ...
                       display pixel: ****0000 0000****
