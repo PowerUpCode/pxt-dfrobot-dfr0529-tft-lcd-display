@@ -416,6 +416,7 @@ let TextSize: int8
                                 for (k = 0; k < TextSize; k++) {
                                     //drawVLine(x + (i % 2) * 8 * TextSize + j * TextSize + k - cursorX,
                                     //    y + (i / 2) * TextSize - cursorY, TextSize, TextColor);
+                                    console.log('drawVLine ' + (x + (i % 2) * 8 * TextSize + j * TextSize + k) + ' , ' + (y + (i / 2) * TextSize) + ' , ' + TextSize + ' , ' + TextColor)
                                     drawVLine(x + (i % 2) * 8 * TextSize + j * TextSize + k,
                                         y + (i / 2) * TextSize, TextSize, TextColor);
                                 }
@@ -439,6 +440,7 @@ let TextSize: int8
                                     for (k = 0; k < TextSize; k++) {
                                         //drawVLine(x + j * TextSize + k - cursorX,
                                         //    y + i * TextSize - cursorY, TextSize, TextColor);
+                                        console.log('drawVLine2 ' + (x + j * TextSize + k) + ' , ' + (y + i * TextSize) + ' , ' + TextSize + ' , ' + TextColor)
                                         drawVLine(x + j * TextSize + k,
                                             y + i * TextSize, TextSize, TextColor);
                                     }
@@ -453,6 +455,7 @@ let TextSize: int8
                                 if (var1 & (0x01 << j)) {
                                     for (k = 0; k < TextSize; k++) {
                                         //drawVLine(x + i * TextSize + k - cursorX, y + j * TextSize - cursorY, TextSize, TextColor);
+                                        console.log('drawVLine3 ' + (x + i * TextSize + k) + ' , ' + (y + j * TextSize) + ' , ' + TextSize + ' , ' + TextColor)
                                         drawVLine(x + i * TextSize + k, y + j * TextSize, TextSize, TextColor);
                                     }
                                 }
