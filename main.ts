@@ -380,10 +380,10 @@ let TextSize: int8
         let var1 = 0;
         let textWidth = 0, textHeight = 0;
 
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
+        for (let ti = 0; ti < text.length; ti++) {
+            const char = text[ti];
             console.log(char);
-            let asciiCode = text.charCodeAt(i);
+            let asciiCode = text.charCodeAt(ti);
             rslt = getCharacter(asciiCode, characterBuffer, textWidth, textHeight);
             fillRect(x, y, textWidth * TextSize, textHeight * TextSize, TextBgColor);
             if (rslt < 0) {
