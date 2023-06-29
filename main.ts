@@ -157,6 +157,9 @@ const DISPLAY_RECTANGLE = 2;
 const MODE_CORNER = 1;
 const MODE_MIDDLE = 2;
 
+const DISPLAY_ERR_PARAM = -2;
+const DISPLAY_WAR_OUTRANGE = 1;
+
 let CS: DigitalPin
 let RS: DigitalPin
 let WR: DigitalPin
@@ -373,9 +376,92 @@ let TextSize: int8
         let var1 = 0;
         let textWidth = 0, textHeight = 0;
 
-        while (text) {
-            //rslt = getCharacter(text, characterBuffer, textWidth, textHeight);
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            let asciiCode = text.charCodeAt(i);
+            rslt = getCharacter(asciiCode, characterBuffer, textWidth, textHeight);
             fillRect(x, y, textWidth * TextSize, textHeight * TextSize, TextBgColor);
+            if (rslt < 0) {
+                //return rslt;
+            } else {
+                if (asciiCode > 0x06 && asciiCode < 0x0e) {
+                    if (asciiCode == 0x0a) {
+                        x = 0;
+                        y += textHeight * TextSize;
+                    }
+                    asciiCode += rslt;
+                    continue;
+                }
+                asciiCode += rslt;
+                //check range
+                if (x > display.width - textWidth * TextSize) {
+                    x = 0;
+                    y += textHeight * TextSize;
+                }
+                if (y > display.height - textHeight * TextSize) {
+                    //return DISPLAY_WAR_OUTRANGE;
+                }
+                if (rslt > 1) {
+                    /*display, charater example:
+                      data: 0xf0, 0x0f, 0x55, 0xaa ...
+                      display pixel: ****0000 0000****
+                                     0*0*0*0* *0*0*0*0
+                    */
+                    for (i = 0; i < 32; i++) {
+                        var1 = characterBuffer[i];
+                        for (j = 0; j < 8; j++) {
+                            if (var1 & (0x01 << j)) {
+                                for (k = 0; k < TextSize; k++) {
+                                    //drawVLine(x + (i % 2) * 8 * TextSize + j * TextSize + k - cursorX,
+                                    //    y + (i / 2) * TextSize - cursorY, TextSize, TextColor);
+                                    drawVLine(x + (i % 2) * 8 * TextSize + j * TextSize + k,
+                                        y + (i / 2) * TextSize, TextSize, TextColor);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    /*display, charater example:
+                      data: 0xf0, 0x0f, 0x55, 0xaa ...
+                      display pixel: ****0000
+                                     0000****
+                                     0*0*0*0*
+                                     *0*0*0*0
+                    */
+                    //8 * 16 text size
+                    if (textHeight == 16) {
+                        for (i = 0; i < 16; i++) {
+                            var1 = characterBuffer[i];
+                            for (j = 0; j < 8; j++) {
+                                if (var1 & (0x01 << j)) {
+                                    for (k = 0; k < TextSize; k++) {
+                                        //drawVLine(x + j * TextSize + k - cursorX,
+                                        //    y + i * TextSize - cursorY, TextSize, TextColor);
+                                        drawVLine(x + j * TextSize + k,
+                                            y + i * TextSize, TextSize, TextColor);
+                                    }
+                                }
+                            }
+                        }
+                        //6 * 8 text size
+                    } else {
+                        for (i = 0; i < textWidth; i++) {
+                            var1 = characterBuffer[i];
+                            for (j = 0; j < 8; j++) {
+                                if (var1 & (0x01 << j)) {
+                                    for (k = 0; k < TextSize; k++) {
+                                        //drawVLine(x + i * TextSize + k - cursorX, y + j * TextSize - cursorY, TextSize, TextColor);
+                                        drawVLine(x + i * TextSize + k, y + j * TextSize, TextSize, TextColor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            x += textWidth * TextSize;
+
         }
 
  
@@ -385,11 +471,30 @@ let TextSize: int8
     }
 
 
-    //function getCharacter(ch: string, chBuf: uint8 [], tWidth: int8, tHeight: int8): number
-    //{
+    function getCharacter(ch: number, chBuf: number[], tWidth: number, tHeight: number): number
+    {
 
-    //    return 0;
-    //}
+        let var1 = 0;
+        if (ch < 0x20) {
+            if (ch > 0x06 && ch < 0x0e) {
+                tWidth = 6; tHeight = 8;
+                return 1;
+            } else {
+                return DISPLAY_ERR_PARAM;
+            }
+
+        } else if (ch < 0x80) {
+            for (var1 = 0; var1 < 6; var1++) {
+                chBuf[var1] = table_character_6_8[ch - 0x20][var1];
+            }
+
+            tWidth = 6; tHeight = 8;
+            return 1;
+        } else {
+            return DISPLAY_ERR_PARAM;
+        }
+  
+    }
 
 
     function initLCD() {
