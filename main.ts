@@ -369,7 +369,10 @@ let TextSize: int8
     //% weight=800 blockGap=8
     export function drawText(x: number, y: number, text: string) {
         
-        let characterBuffer: uint8 [];
+        let characterBuffer: number[] = [];
+        for (let i = 0; i < 32; i++) {
+            characterBuffer.push(0);
+        }
         let rslt = 0;
         let i = 0, j = 0, k = 0;
         let var1 = 0;
